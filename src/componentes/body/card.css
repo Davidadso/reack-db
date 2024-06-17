@@ -1,0 +1,184 @@
+/* Estilos de las tarjetas de productos */
+.divCards {
+    box-shadow: rgba(0, 0, 255, 0.6) -5px 5px,
+        rgba(0, 0, 255, 0.5) -10px 10px,
+        rgba(0, 0, 255, 0.4) -15px 15px,
+        rgba(0, 0, 255, 0.3) -20px 20px,
+        rgba(0, 0, 255, 0.2) -25px 25px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 50px;
+    padding: 20px;
+    margin: 20px;
+    background-color: black;
+    align-items: stretch; /* Estirar todas las tarjetas para que tengan la misma altura */
+}
+
+.listProduct .item {
+    background-color: #eeeee6;
+    padding: 20px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 450px;
+    position: relative;
+}
+
+.listProduct .item img {
+    height: 60%;
+    width: 80%;
+    filter: drop-shadow(0 50px 20px #0009);
+    border-radius: 20px;
+    margin: auto;
+    display: block;
+}
+
+.listProduct .item h6 {
+    font-weight: 500;
+    margin-top: 10px;
+}
+
+.listProduct .item p {
+    text-align: center;
+    margin: 5px 0;
+}
+
+.listProduct .item .specs {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.listProduct .item .price {
+    margin-top: auto; /* Ajustar el precio al final del contenedor */
+    font-weight: bold;
+    text-align: center;
+}
+
+.listProduct .item button {
+    background-color: red;
+    color: #eee;
+    padding: 5px 5px; /* Aumentar el tamaño del botón */
+    border-radius: 20px;
+    position: relative;
+    bottom: 1px; /* Ajustar la posición vertical del botón */
+    left: 50%;
+    transform: translateX(-50%);
+    border: none;
+    cursor: pointer;
+}
+
+
+
+.listProduct .item .top-content {
+    flex: 1; /* Hacer que este contenido se expanda */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+/* --------------------------------CARRITO--------------------------------------- */
+/* [---------------------tabla------------------------] */
+.cartTab {
+    width: 400px;
+    background-color: yellow;
+    color: black;
+    position: fixed;
+    inset: 0 -400px 0 auto;
+    z-index: 1000;
+    display: grid;
+    grid-template-rows: 70px 1fr 70px;
+    transition: 0.5s;
+}
+
+.showCart .cartTab {
+    inset: 0 0 0 auto;
+}
+
+.showCart .container {
+    transform: translateX(-250px);
+}
+
+.cartTab h1 {
+    padding: 20px;
+    margin: 0;
+    font-weight: 300;
+    text-align: center;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.cartTab p {
+    text-align: center;
+    display: flex;  /* Usamos flex para centrar verticalmente */
+    align-items: center;  /* Centra verticalmente */
+    justify-content: center;  /* Centra horizontalmente */
+    height: 100%;  /* Se asegura de ocupar toda la altura del espacio */    
+}
+
+.cartTab .btn {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.cartTab .btn button {
+    background-color: #E8BC0E;
+    border: none;
+    font-family: Poppins;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.cartTab .btn .close {
+    background-color:white;
+}
+
+/* [---------------------contenido/item------------------] */
+
+.cartTab .listCart .item img {
+    width: 100%;
+}
+
+.cartTab .listCart .item {
+    display: grid;
+    grid-template-columns: 70px 150px 1fr;
+    gap: 10px; /* Ajusta el espacio entre las columnas */
+    text-align: center;
+    align-items: center;
+}
+
+.listCart .quantity {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.listCart .quantity span {
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    background-color: green;
+    color: #555;
+    border-radius: 50%;
+    cursor: pointer;
+    align-items: center;
+    margin: 0 5px; /* Ajusta el espacio entre los botones */
+}
+
+.quantity span:nth-child(2) {
+    background-color: transparent;
+    color: black;
+}
+
+.item:nth-child(even) {
+    background-color: #eee1;
+}
+
+.listCart {
+    overflow: auto;
+    max-width: 400px;
+}
+
+.listCart::-webkit-scrollbar {
+    width: 0;
+}

@@ -1,0 +1,98 @@
+[
+    {
+        "id": 1,
+        "identificacion": "236598",
+        "nombres": "Pepito",
+        "apellidos": "Perez",
+        "email": "pepito@gmail.com",
+        "direccion": "calle 8 cra 23 barrio los pinos",
+        "telefono": "3232323232",
+        "password": "Abc1234#$",
+        "estado": "activo",
+        "fecha_creación": "2024-03-06T19:25:30.038Z"
+    },
+    {
+        "id": 2,
+        "identificacion": "5698741",
+        "nombres": "Luisito",
+        "apellidos": "Muñoz",
+        "email": "luisito@gmail.com",
+        "direccion": "calle 8 cra 23 barrio los pinos",
+        "telefono": "1236447989",
+        "password": "Abc1234#$",
+        "estado": "activo",
+        "fecha_creación": "2024-03-06T19:38:33.634Z"
+    },
+    {
+        "id": 3,
+        "identificacion": "322332323",
+        "nombres": "Armando Casas",
+        "apellidos": "De bareque",
+        "email": "armando@gmail.com",
+        "direccion": "calle 8 cra 23 barrio los pinos",
+        "telefono": "2121212121",
+        "password": "Abc1234#$",
+        "estado": "activo",
+        "fecha_creación": "2024-03-06T19:47:10.314Z"
+    },
+    {
+        "id": 4,
+        "identificacion": "32654835",
+        "nombres": "Luciana",
+        "apellidos": "Montes",
+        "email": "luciana@gmail.com",
+        "direccion": "calle 8 cra 23 barrio los pinos",
+        "telefono": "3232323231",
+        "password": "Abc1234#$",
+        "estado": "activo",
+        "fecha_creación": "2024-03-06T20:00:53.350Z"
+    },
+    {
+        "id": 5,
+        "identificacion": "23659",
+        "nombres": "Rey",
+        "apellidos": "Ruis",
+        "email": "rey@hotmail.com",
+        "direccion": "mz 4 casa 15 cuba 3",
+        "telefono": "2396854123",
+        "password": "Abc1234#$",
+        "estado": "activo",
+        "fecha_creación": "2024-03-10T16:41:01.702Z"
+    },
+    {
+        "id": 6,
+        "identificacion": "1004520480",
+        "nombres": "Jesus David",
+        "apellidos": "Londoño Garcia",
+        "email": "jesusalondon2016@gmail.com",
+        "direccion": "miraflores",
+        "telefono": "3122794630",
+        "password": "Abc123456*",
+        "estado": "activo",
+        "fecha_creación": "2024-05-07T21:47:31.023Z"
+    },
+    {
+        "id": 7,
+        "identificacion": "23123213",
+        "nombres": "Jesus Davidwdadsd",
+        "apellidos": "Londoño Garciasdsad",
+        "email": "jesusalosdadndon2016@gmail.com",
+        "direccion": "samariasadsa",
+        "telefono": "3162324324",
+        "password": "Abc1234*",
+        "estado": "activo",
+        "fecha_creación": "2024-05-08T22:07:23.488Z"
+    },
+    {
+        "id": 8,
+        "identificacion": "3434322132",
+        "nombres": "pepito ",
+        "apellidos": "dientes",
+        "email": "dientes@gmail.com",
+        "direccion": "mirafloress",
+        "telefono": "1234567891",
+        "password": "Abc1234@",
+        "estado": "activo",
+        "fecha_creación": "2024-05-08T22:08:50.841Z"
+    }
+]

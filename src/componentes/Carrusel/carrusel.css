@@ -1,0 +1,37 @@
+/* Establece el color de fondo del carrusel */
+#carouselExampleIndicators.carousel {
+  background-color: white;
+  padding-top: 150px;
+}
+
+.carousel-inner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.carousel-item {
+  text-align: center; /* Alinea el texto en el centro */
+  right: 300px;
+}
+
+
+/* Ajusta el tamaño de las imágenes */
+.carousel-inner img {
+  max-width: 37%; /* La imagen no superará el ancho del contenedor */
+  max-height: 37; /* La altura se ajustará automáticamente para mantener la proporción */
+  background-color: blue;
+}
+
+/* Agrega un borde negro alrededor del carrusel */
+.carousel {
+  border: 5px solid black;
+}
+
+
+#carouselExampleIndicators {
+  margin-left: 130px; 
+  margin-right: 130px;
+}
+
+
