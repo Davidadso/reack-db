@@ -11,7 +11,7 @@ app.use(cors());
 
 const user = require('./Controller/userController');
 
-app.get("/", (req, res) => {
+/* app.get("/", (req, res) => {
     let config = {
         method: "GET",
         maxBodyLength: Infinity,
@@ -25,7 +25,24 @@ app.get("/", (req, res) => {
         .then(result => {
             res.send(result.data.record);
         });
+}); */
+
+//Solicitamos la conexión a la BD
+const conexion = require('./configDB/configDB.js')
+
+app.get("/todos-los-Usuarios", (req, res) => {
+conexion.connect(function (err) {
+if (err) throw err;
+//Select all customers and return the result object:
+conexion.query("SELECT * FROM sql10714615.usuario", function (err, result, fields) {
+if (err) throw err;
+res.send(result)
 });
+});
+})
+
+
+
 
 app.post('/registro-usuario', user.register);
 app.post('/login', user.login);
