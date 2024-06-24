@@ -1,6 +1,6 @@
-const pool = require('../configDB/configDB.js');
+const pool = require('../configDB/configDB');
 
-const controller = {
+const userController = {
     register: async function (req, res) {
         const { identificacion, nombres, apellidos, email, direccion, telefono, password } = req.body;
 
@@ -21,7 +21,7 @@ const controller = {
 
             // Insertar el nuevo usuario
             await connection.query(
-                'INSERT INTO usuario (identificacion, nombres, apellidos, email, direccion, telefono, password, estado, fecha_creación) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
+                'INSERT INTO usuario (identificacion, nombres, apellidos, email, direccion, telefono, password, estado, fecha_creacion) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
                 [identificacion, nombres, apellidos, email, direccion, telefono, password, "activo", new Date()]
             );
 
@@ -32,41 +32,6 @@ const controller = {
             res.status(500).json({ message: 'Error interno del servidor', error: error.message });
         }
     },
-
-    login: async function (req, res) {
-        const { email, password } = req.body;
-
-        if (!email || !password) {
-            return res.status(400).json({ message: 'Email y contraseña son obligatorios' });
-        }
-
-        try {
-            const connection = await pool.getConnection();
-            const [user] = await connection.query('SELECT * FROM usuario WHERE email = ? AND password = ?', [email, password]);
-            connection.release();
-
-            if (user.length > 0) {
-                return res.status(200).json({ message: "Autenticación exitosa", user: user[0] });
-            } else {
-                return res.status(400).json({ message: "Credenciales incorrectas" });
-            }
-        } catch (error) {
-            console.error('Error al procesar el inicio de sesión:', error);
-            res.status(500).json({ message: 'Error interno del servidor', error: error.message });
-        }
-    },
-
-    getAllUsers: async function (req, res) {
-        try {
-            const connection = await pool.getConnection();
-            const [result] = await connection.query("SELECT * FROM usuario");
-            connection.release();
-            res.send(result);
-        } catch (error) {
-            console.error('Error al obtener los usuarios:', error);
-            res.status(500).json({ message: 'Error interno del servidor', error: error.message });
-        }
-    }
 };
 
-module.exports = controller;
+module.exports = userController;
