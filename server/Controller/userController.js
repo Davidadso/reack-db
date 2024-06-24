@@ -35,6 +35,10 @@ const controller = {
     login: async function (req, res) {
         const { email, password } = req.body;
 
+        if (!email || !password) {
+            return res.status(400).send('Email y contraseña son obligatorios');
+        }
+
         try {
             const connection = await pool.getConnection();
             const [user] = await connection.query('SELECT * FROM usuario WHERE email = ? AND password = ?', [email, password]);
@@ -48,6 +52,18 @@ const controller = {
         } catch (error) {
             console.error('Error al procesar el inicio de sesión:', error);
             res.status(500).json({ message: 'Error interno del servidor' });
+        }
+    },
+
+    getAllUsers: async function (req, res) {
+        try {
+            const connection = await pool.getConnection();
+            const [result] = await connection.query("SELECT * FROM usuario");
+            connection.release();
+            res.send(result);
+        } catch (error) {
+            console.error('Error al obtener los usuarios:', error);
+            res.status(500).send('Error interno del servidor');
         }
     }
 };
