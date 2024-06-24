@@ -6,7 +6,6 @@ import Header from './header/Header';
 import Footer from './footer/Footer';
 
 export default function Registro() {
-   
     const validPasswordRegex = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
     const validEmailRegex = /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/;
 
@@ -63,7 +62,7 @@ export default function Registro() {
 
         if (Object.values(newErrors).every(error => !error)) {
             try {
-                const response = await fetch(process.env.REACT_APP_ENVIRONMENT + '/registro-usuario', {
+                const response = await fetch(`${process.env.REACT_APP_ENVIRONMENT}/registro-usuario`, {
                     method: 'POST',
                     headers: { "Content-Type": "application/json", 'Accept': 'application/json' },
                     body: JSON.stringify(values)
@@ -79,7 +78,7 @@ export default function Registro() {
                 } else {
                     const data = await response.json();
                     Swal.fire({
-                        title: data.message,
+                        title: data.message || 'Error al registrar el usuario',
                         icon: "warning"
                     });
                 }
@@ -95,7 +94,7 @@ export default function Registro() {
     return (
         <div>
             <Header />
-            <br></br><br></br><br></br>
+            <br /><br /><br />
             <div className='container-fluid bg-white' style={{ minHeight: '100vh', paddingTop: '50px' }}>
                 <div className='row justify-content-center'>
                     <div className='col-lg-8 col-md-10 col-sm-12'>
