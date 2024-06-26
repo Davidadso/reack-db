@@ -49,17 +49,16 @@ const Registro = () => {
     return (
         <div>
             <Header />
-            <br></br><br></br><br></br>
+            <br/><br/><br/>
             <div className='container-fluid bg-white' style={{ minHeight: '100vh', paddingTop: '50px' }}>
                 <div className='row justify-content-center'>
                     <div className='col-lg-8 col-md-10 col-sm-12'>
                         <div className='card border border-primary'>
                             <div className='card-body p-4'>
                                 <h2 className='text-uppercase text-center mb-4' style={{ color: 'blue' }}>Registro</h2>
-                                <form onSubmit={handleSubmit} >
+                                <form onSubmit={handleSubmit}>
                                     <div className='form-outline mb-4'>
-                                        <input type='text' id='form-identificacion' className={`form-control ${errors.identificacion ? 'is-invalid' : ''}`} name='identificacion' value={values.identificacion} onChange={handleChange} placeholder='Identificación' />
-                                        {errors.identificacion && <p className='invalid-feedback'>El campo Identificación es requerido</p>}
+                                        <input type='text' id='form-identificacion' className='form-control' name='identificacion' value={values.identificacion} onChange={handleChange} placeholder='Identificación' required/>
                                     </div>
                                     {/* Repite para los demás campos */}
                                     <div className='d-flex justify-content-center'>

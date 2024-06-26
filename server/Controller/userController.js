@@ -4,7 +4,6 @@ const userController = {
     register: async function (req, res) {
         const { identificacion, nombres, apellidos, email, direccion, telefono, password } = req.body;
 
-        // Validación de los campos
         if (!identificacion || !nombres || !apellidos || !email || !direccion || !telefono || !password) {
             return res.status(400).json({ message: 'Todos los campos son obligatorios' });
         }
@@ -12,14 +11,12 @@ const userController = {
         try {
             const connection = await pool.getConnection();
 
-            // Verificar si el email ya existe
             const [existingUser] = await connection.query('SELECT * FROM usuario WHERE email = ?', [email]);
             if (existingUser.length > 0) {
                 connection.release();
                 return res.status(400).json({ message: "El email ya existe" });
             }
 
-            // Insertar el nuevo usuario
             await connection.query(
                 'INSERT INTO usuario (identificacion, nombres, apellidos, email, direccion, telefono, password, estado, fecha_creacion) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
                 [identificacion, nombres, apellidos, email, direccion, telefono, password, "activo", new Date()]
