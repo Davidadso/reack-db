@@ -27,6 +27,23 @@ app.get("/", (req, res) => {
         });
 });
 
+
+//Solicitamos la conexión a la BD
+const conexion = require('./configDB/configDB.js')
+
+app.get("/todos-los-Usuarios", (req, res) => {
+conexion.connect(function (err) {
+if (err) throw err;
+//Select all customers and return the result object:
+conexion.query("SELECT * FROM sql10716371.usuario", function (err, result, fields) {
+if (err) throw err;
+res.send(result)
+});
+});
+})
+
+
+
 app.post('/registro-usuario', user.register);
 app.post('/login', user.login);
 
