@@ -14,30 +14,36 @@ app.use(cors());
 
 // Rutas para el controlador de usuario
 const { registrarUsuario, iniciarSesion } = require('./Controller/userController');
-app.post('/registro', registrarUsuario);
-app.post('/login', iniciarSesion);
+
+app.post('/registro', (req, res) => {
+  registrarUsuario(req, res); // Llama a la función registrarUsuario desde userController.js
+});
+
+app.post('/login', (req, res) => {
+  iniciarSesion(req, res); // Llama a la función iniciarSesion desde userController.js
+});
 
 // Ruta para obtener datos de JSONBin
 app.get("/", (req, res) => {
-    let config = {
-      method: "GET",
-      maxBodyLength: Infinity,
-      url: 'https://api.jsonbin.io/v3/b/664e4495e41b4d34e4f7d7f2',
-      headers: {
-        'Content-Type': 'application/json',
-        "X-Master-Key": "$2a$10$/mcvIEltjOIKAA3.1TkrE.D1nJgzbo5AigxCM0BKZOSh5HXm2.9o2"
-      }
-    };
-  
-    axios(config)
-      .then(result => {
-        res.send(result.data.record);
-      })
-      .catch(error => {
-        console.error('Error fetching data from JSONBin:', error);
-        res.status(500).send('Error fetching data');
-      });
-  });
+  let config = {
+    method: "GET",
+    maxBodyLength: Infinity,
+    url: 'https://api.jsonbin.io/v3/b/664e4495e41b4d34e4f7d7f2',
+    headers: {
+      'Content-Type': 'application/json',
+      "X-Master-Key": "$2a$10$/mcvIEltjOIKAA3.1TkrE.D1nJgzbo5AigxCM0BKZOSh5HXm2.9o2"
+    }
+  };
+
+  axios(config)
+    .then(result => {
+      res.send(result.data.record);
+    })
+    .catch(error => {
+      console.error('Error fetching data from JSONBin:', error);
+      res.status(500).send('Error fetching data');
+    });
+});
 
 // Ruta para obtener todos los usuarios desde la base de datos
 const conexion = require('./configBD');
