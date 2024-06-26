@@ -28,10 +28,10 @@ app.get("/", (req, res) => {
   let config = {
     method: "GET",
     maxBodyLength: Infinity,
-    url: 'https://api.jsonbin.io/v3/b/664e4495e41b4d34e4f7d7f2',
+    url: 'https://api.jsonbin.io/v3/b/6668ff29ad19ca34f877c92e',
     headers: {
       'Content-Type': 'application/json',
-      "X-Master-Key": "$2a$10$/mcvIEltjOIKAA3.1TkrE.D1nJgzbo5AigxCM0BKZOSh5HXm2.9o2"
+      "X-Master-Key": "$2a$10$/a5upKwW.VZAlpmN2zJ.y.vBK5GIMFO2zRfsgTRFVJ8GoKX5iQf0y"
     }
   };
 
