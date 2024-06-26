@@ -3,21 +3,21 @@ const app = express();
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const axios = require('axios');
-const { registrarUsuario, iniciarSesion } = require('./Controller/userController');
 const path = require('path');
 const PORT = process.env.PORT || 3001;
 
-
-
+// Middleware
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(bodyParser.json());
 app.use(cors());
+
+// Rutas para el controlador de usuario
+const { registrarUsuario, iniciarSesion } = require('./Controller/userController');
 app.post('/registro', registrarUsuario);
 app.post('/login', iniciarSesion);
 
-const user = require('./Controller/userController');
-
+// Ruta para obtener datos de JSONBin
 app.get("/", (req, res) => {
     let config = {
       method: "GET",
@@ -39,40 +39,37 @@ app.get("/", (req, res) => {
       });
   });
 
-//Solicitamos la conexión a la BD
-const conexion = require('./configBD.js');
-
-app.get("/todos-los-Usuarios", (req, res) => {
-conexion.connect(function (err) {
-if (err) throw err;
-//Select all customers and return the result object:
-conexion.query("SELECT * FROM sql10716371.usuario", function (err, result, fields) {
-if (err) throw err;
-res.send(result)
+// Ruta para obtener todos los usuarios desde la base de datos
+const conexion = require('./configBD');
+app.get("/todos-los-usuarios", (req, res) => {
+  conexion.connect(function (err) {
+    if (err) {
+      console.error('Error de conexión a la base de datos:', err);
+      res.status(500).send('Error de conexión a la base de datos');
+      return;
+    }
+    
+    conexion.query("SELECT * FROM sql10716371.usuario", function (err, result, fields) {
+      conexion.end(); // Cerrar la conexión después de la consulta
+      if (err) {
+        console.error('Error al ejecutar la consulta:', err);
+        res.status(500).send('Error al ejecutar la consulta');
+        return;
+      }
+      res.send(result);
+    });
+  });
 });
-});
-})
 
-
-// Serve static files from the React app
+// Servir archivos estáticos desde la carpeta 'build' de React
 app.use(express.static(path.join(__dirname, 'build')));
 
-// Handle any other requests by returning the React app
+// Manejar todas las demás solicitudes devolviendo la aplicación React
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
+// Iniciar el servidor en el puerto especificado
 app.listen(PORT, () => {
   console.log(`Servidor escuchando en el puerto ${PORT}`);
-});
-
-
-
-
-app.post('/registro-usuario', user.register);
-app.post('/login', user.login);
-
-
-app.listen(PORT, () => {
-    console.log("Servidor corriendo en el puerto ", PORT);
 });
