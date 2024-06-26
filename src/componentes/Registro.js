@@ -1,12 +1,11 @@
 import React, { useRef, useState } from 'react';
 import Swal from 'sweetalert2';
-import './Registro.css'; // Importa los estilos CSS
+import './Registro.css';
 import { Link } from 'react-router-dom';
 import Header from './header/Header';
 import Footer from './footer/Footer';
 
 export default function Registro() {
-   
     const validPasswordRegex = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
     const validEmailRegex = /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/;
 
@@ -63,7 +62,7 @@ export default function Registro() {
 
         if (Object.values(newErrors).every(error => !error)) {
             try {
-                const response = await fetch(process.env.REACT_APP_ENVIRONMENT + '/registro-usuario', {
+                const response = await fetch('http://tu-dominio.com/registro-usuario', {
                     method: 'POST',
                     headers: { "Content-Type": "application/json", 'Accept': 'application/json' },
                     body: JSON.stringify(values)
@@ -74,7 +73,6 @@ export default function Registro() {
                         title: "Usuario creado con éxito",
                         icon: "success"
                     });
-                   
                     window.location.hash = '/login';
                 } else {
                     const data = await response.json();
@@ -102,7 +100,7 @@ export default function Registro() {
                         <div className='card border border-primary'>
                             <div className='card-body p-4'>
                                 <h2 className='text-uppercase text-center mb-4' style={{ color: 'blue' }}>Registro</h2>
-                                <form onSubmit={handleSubmit} >
+                                <form onSubmit={handleSubmit}>
                                     {Object.entries(values).map(([key, value]) => (
                                         <div className='form-outline mb-4' key={key}>
                                             <input type={key === 'password' || key === 'passRepeat' ? 'password' : 'text'} id={`form-${key}`} className={`form-control ${errors[key] ? 'is-invalid' : ''}`} name={key} value={value} onChange={handleChange} placeholder={key[0].toUpperCase() + key.slice(1)} />
