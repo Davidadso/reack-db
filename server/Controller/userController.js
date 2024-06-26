@@ -1,4 +1,4 @@
-const pool = require('../configDB/configDB');
+const pool = require('../configBD');
 
 const userController = {
     register: async function (req, res) {

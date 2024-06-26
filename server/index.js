@@ -29,7 +29,7 @@ app.get("/", (req, res) => {
 
 
 //Solicitamos la conexión a la BD
-const conexion = require('./configBD/configBD.js');
+const conexion = require('../configBD.js');
 
 app.get("/todos-los-Usuarios", (req, res) => {
 conexion.connect(function (err) {
