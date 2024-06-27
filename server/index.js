@@ -1,28 +1,20 @@
 const express = require('express');
-const app = express();
 const cors = require('cors');
 const bodyParser = require('body-parser');
-const path = require('path');
-const PORT = process.env.PORT || 3001;
-
-// Middleware
-app.use(bodyParser.json());
-app.use(cors());
-
-// Rutas para el controlador de usuario
 const { registrarUsuario } = require('./Controller/userController');
 
-app.post('/registro-usuario', registrarUsuario);
+const app = express();
+const PORT = process.env.PORT || 3001;
 
-// Servir archivos estáticos desde la carpeta 'build' de React
-app.use(express.static(path.join(__dirname, 'build')));
+app.use(cors());
+app.use(bodyParser.json());
 
-// Manejar todas las demás solicitudes devolviendo la aplicación React
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+app.post('/registro-usuario', (req, res) => {
+    console.log('Solicitud recibida en /registro-usuario');
+    console.log('Cuerpo de la solicitud:', req.body);
+    registrarUsuario(req, res);
 });
 
-// Iniciar el servidor en el puerto especificado
 app.listen(PORT, () => {
-  console.log(`Servidor escuchando en el puerto ${PORT}`);
+    console.log(`Servidor escuchando en el puerto ${PORT}`);
 });
