@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import Swal from 'sweetalert2';
 import './Registro.css';
 import { Link } from 'react-router-dom';
@@ -62,7 +62,7 @@ export default function Registro() {
 
         if (Object.values(newErrors).every(error => !error)) {
             try {
-                const response = await fetch('http://tu-dominio.com/registro-usuario', {
+                const response = await fetch('https://tu-dominio.com/registro-usuario', {  // Asegúrate de usar HTTPS aquí
                     method: 'POST',
                     headers: { "Content-Type": "application/json", 'Accept': 'application/json' },
                     body: JSON.stringify(values)
@@ -113,7 +113,7 @@ export default function Registro() {
                                         <button type='submit' className='btn btn-success btn-lg'>Register</button>
                                     </div>
                                 </form>
-                                <p className='text-center text-muted mt-3 mb-0'>Already have an account? <Link to='/login' className='fw-bold text-dark'><u>Login here</u></Link></p>
+                                <p className='text-center text-muted mt-3 mb-0'>¿Ya tienes una cuenta? <Link to='/login' className='fw-bold text-dark'><u>Inicia sesión aquí</u></Link></p>
                             </div>
                         </div>
                     </div>
