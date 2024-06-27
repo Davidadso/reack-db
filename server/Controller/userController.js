@@ -51,4 +51,4 @@ const iniciarSesion = async (req, res) => {
     }
 };
 
-module.exports = { registrarUsuario };
+module.exports = { registrarUsuario,  iniciarSesion};
