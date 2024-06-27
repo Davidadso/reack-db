@@ -15,12 +15,12 @@ app.use(cors());
 // Rutas para el controlador de usuario
 const { registrarUsuario, iniciarSesion } = require('./Controller/userController');
 
-app.post('/registro', (req, res) => {
-  registrarUsuario(req, res); // Llama a la función registrarUsuario desde userController.js
+app.post('/registro-usuario', (req, res) => {
+  registrarUsuario(req, res);
 });
 
 app.post('/login', (req, res) => {
-  iniciarSesion(req, res); // Llama a la función iniciarSesion desde userController.js
+  iniciarSesion(req, res);
 });
 
 // Ruta para obtener datos de JSONBin
