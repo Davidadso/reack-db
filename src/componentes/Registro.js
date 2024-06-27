@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import Swal from 'sweetalert2';
 import './Registro.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Header from './header/Header';
 import Footer from './footer/Footer';
 
 export default function Registro() {
+    const navigate = useNavigate();
     const validPasswordRegex = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
     const validEmailRegex = /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/;
 
@@ -62,9 +63,9 @@ export default function Registro() {
 
         if (Object.values(newErrors).every(error => !error)) {
             try {
-                const response = await fetch('https://tu-dominio.com/registro-usuario', {  // Asegúrate de usar HTTPS aquí
+                const response = await fetch('http://localhost:3001/registro-usuario', {
                     method: 'POST',
-                    headers: { "Content-Type": "application/json", 'Accept': 'application/json' },
+                    headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(values)
                 });
 
@@ -73,17 +74,18 @@ export default function Registro() {
                         title: "Usuario creado con éxito",
                         icon: "success"
                     });
-                    window.location.hash = '/login';
+                    navigate('/login');
                 } else {
                     const data = await response.json();
                     Swal.fire({
-                        title: data.message,
-                        icon: "warning"
+                        title: data.error || "Error al registrar usuario",
+                        icon: "error"
                     });
                 }
             } catch (error) {
+                console.error('Error:', error);
                 Swal.fire({
-                    title: "No fue posible finalizar el proceso de registro por un error interno del servidor",
+                    title: "Error al conectar con el servidor",
                     icon: "error"
                 });
             }
@@ -103,7 +105,15 @@ export default function Registro() {
                                 <form onSubmit={handleSubmit}>
                                     {Object.entries(values).map(([key, value]) => (
                                         <div className='form-outline mb-4' key={key}>
-                                            <input type={key === 'password' || key === 'passRepeat' ? 'password' : 'text'} id={`form-${key}`} className={`form-control ${errors[key] ? 'is-invalid' : ''}`} name={key} value={value} onChange={handleChange} placeholder={key[0].toUpperCase() + key.slice(1)} />
+                                            <input 
+                                                type={key === 'password' || key === 'passRepeat' ? 'password' : 'text'} 
+                                                id={`form-${key}`} 
+                                                className={`form-control ${errors[key] ? 'is-invalid' : ''}`} 
+                                                name={key} 
+                                                value={value} 
+                                                onChange={handleChange} 
+                                                placeholder={key[0].toUpperCase() + key.slice(1)} 
+                                            />
                                             {errors[key] && <p className='invalid-feedback'>El campo {key} es requerido{(key === 'telefono' && value.length !== 10) ? " y debe tener 10 dígitos" : ""}</p>}
                                         </div>
                                     ))}
