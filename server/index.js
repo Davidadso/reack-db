@@ -10,17 +10,17 @@ const PORT = process.env.PORT || 3001;
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(bodyParser.json());
-app.use(cors()); // Utiliza cors como middleware para todas las rutas
+app.use(cors()); // Middleware CORS global
 
 // Rutas para el controlador de usuario
 const { registrarUsuario, iniciarSesion } = require('./Controller/userController');
 
 app.post('/registro-usuario', (req, res) => {
-  registrarUsuario(req, res);
+  registrarUsuario(req, res); // Llama a la función registrarUsuario desde userController.js
 });
 
 app.post('/login', (req, res) => {
-  iniciarSesion(req, res);
+  iniciarSesion(req, res); // Llama a la función iniciarSesion desde userController.js
 });
 
 // Ruta para obtener datos de JSONBin
