@@ -1,20 +1,25 @@
 const express = require('express');
 const cors = require('cors');
-const bodyParser = require('body-parser');
-const { registrarUsuario } = require('./Controller/userController');
+const { registrarUsuario, iniciarSesion } = require('./controladores/usuarioController');
 
 const app = express();
-const PORT = process.env.PORT || 3001;
 
+// Middleware
 app.use(cors());
-app.use(bodyParser.json());
+app.use(express.json());
 
-app.post('/registro-usuario', (req, res) => {
-    console.log('Solicitud recibida en /registro-usuario');
-    console.log('Cuerpo de la solicitud:', req.body);
-    registrarUsuario(req, res);
+// Rutas
+app.post('/api/usuarios/registro', registrarUsuario);
+app.post('/api/usuarios/login', iniciarSesion);
+
+// Manejo de errores global
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).send('Algo salió mal!');
 });
 
+// Iniciar el servidor
+const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
     console.log(`Servidor escuchando en el puerto ${PORT}`);
 });
