@@ -24,7 +24,7 @@ app.post('/login', (req, res) => {
 });
 
 // Ruta para obtener datos de JSONBin
-app.get("/", (req, res) => {
+app.get("/data-jsonbin", (req, res) => {
   let config = {
     method: "GET",
     maxBodyLength: Infinity,
@@ -73,6 +73,11 @@ app.use(express.static(path.join(__dirname, 'build')));
 // Manejar todas las demás solicitudes devolviendo la aplicación React
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
+
+// Manejo de errores 404
+app.use((req, res, next) => {
+  res.status(404).sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
 // Iniciar el servidor en el puerto especificado
