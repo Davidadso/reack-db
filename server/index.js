@@ -10,7 +10,7 @@ const PORT = process.env.PORT || 3001;
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(bodyParser.json());
-app.use(cors());
+app.use(cors()); // Utiliza cors como middleware para todas las rutas
 
 // Rutas para el controlador de usuario
 const { registrarUsuario, iniciarSesion } = require('./Controller/userController');
@@ -54,7 +54,7 @@ app.get("/todos-los-usuarios", (req, res) => {
       res.status(500).send('Error de conexión a la base de datos');
       return;
     }
-    
+
     conexion.query("SELECT * FROM sql10716371.usuario", function (err, result, fields) {
       conexion.end(); // Cerrar la conexión después de la consulta
       if (err) {
