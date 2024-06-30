@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-const { registrarUsuario, iniciarSesion } = require('./Controller/usuarioController');
+const { registrarUsuario, iniciarSesion } = require('./Controller/userController');
 
 const app = express();
 
