@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
-const { registrarUsuario } = require('./Controller/userController');
+const { registrarUsuario, iniciarSesion } = require('./Controller/userController');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -9,10 +9,14 @@ const PORT = process.env.PORT || 3001;
 app.use(cors());
 app.use(bodyParser.json());
 
-app.post('/registro-usuario', (req, res) => {
-    console.log('Solicitud recibida en /registro-usuario');
-    console.log('Cuerpo de la solicitud:', req.body);
-    registrarUsuario(req, res);
+// Cambia esta línea
+app.post('/api/usuarios/registro', registrarUsuario);
+app.post('/api/usuarios/login', iniciarSesion);
+
+// Manejo de errores
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).json({ error: 'Algo salió mal', details: err.message });
 });
 
 app.listen(PORT, () => {
